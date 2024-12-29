@@ -1,35 +1,33 @@
-import { useState, useEffect } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import SignInButton from "./components/SignInButton";
-import LogoutButton from "./components/LogoutButton";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navigation from "./components/Navigation";
+import HomePage from "./components/HomePage";
+import UserProfile from "./components/UserProfile";
+import ProtectedRoute from "./utils/ProtectedRoute";
+import { useAuth } from "./utils/useAuth";
 
 function App() {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-    });
-
-    // Cleanup subscription
-    return () => unsubscribe();
-  }, []);
+  const { user, loading } = useAuth();
 
   return (
-    <div>
-      {user ? (
-        <div>
-          <p>Welcome, {user.email}!</p>
-          <LogoutButton />
-        </div>
-      ) : (
-        <div>
-          <p>Please sign in</p>
-          <SignInButton />
-        </div>
-      )}
-    </div>
+    <Router>
+      <div className="p-4">
+        <Navigation user={user} />
+
+        <main className="container mx-auto">
+          <Routes>
+            <Route path="/" element={<HomePage user={user} />} />
+            <Route 
+              path="/profile" 
+              element={
+                <ProtectedRoute user={user} loading={loading}>
+                  <UserProfile />
+                </ProtectedRoute>
+              } 
+            />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
