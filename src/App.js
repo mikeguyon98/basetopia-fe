@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
-import HomePage from "./components/HomePage";
+import HomePage from "./pages/HomePage";
 import UserProfile from "./components/UserProfile";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { useAuth } from "./utils/useAuth";
