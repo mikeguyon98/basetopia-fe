@@ -6,30 +6,49 @@ import { ContentCard } from '../components/ContentCard';
 const mockContent = [
   {
     id: 1,
-    title: "Getting Started with React",
-    description: "Learn the basics of React and how to build your first application",
+    title: "Baseball Pitching Fundamentals",
+    description: "Master the basic pitching techniques and grips for different pitch types",
     type: "video",
-    thumbnail: "https://picsum.photos/seed/react/800/600",
-    author: "Jane Doe",
+    thumbnail: "https://picsum.photos/seed/baseball1/800/600",
+    videoUrl: "https://mlb-cuts-diamond.mlb.com/FORGE/2024/2024-02/22/4cf6d8fb-5dab6c56-f3c3f4a2-csvm-diamondx64-asset_1280x720_59_4000K.mp4",
+    author: "Mike Martinez",
     date: "2024-03-20"
   },
   {
     id: 2,
-    title: "Advanced JavaScript Patterns",
-    description: "Deep dive into advanced JavaScript patterns and best practices",
+    title: "History of the World Series",
+    description: "Explore the most memorable moments in World Series history",
     type: "article",
-    thumbnail: "https://picsum.photos/seed/js/800/600",
-    author: "John Smith",
+    thumbnail: "https://picsum.photos/seed/baseball2/800/600",
+    author: "Sarah Thompson",
     date: "2024-03-19"
   },
   {
     id: 3,
-    title: "CSS Grid Mastery",
-    description: "Master CSS Grid layout with practical examples",
+    title: "Advanced Batting Techniques",
+    description: "Improve your hitting with professional batting tips and drills",
     type: "video",
-    thumbnail: "https://picsum.photos/seed/css/800/600",
-    author: "Alice Johnson",
+    thumbnail: "https://picsum.photos/seed/baseball3/800/600",
+    author: "David Rodriguez",
     date: "2024-03-18"
+  },
+  {
+    id: 4,
+    title: "Baseball Analytics 101",
+    description: "Understanding modern baseball statistics and sabermetrics",
+    type: "article",
+    thumbnail: "https://picsum.photos/seed/baseball4/800/600",
+    author: "Emily Chen",
+    date: "2024-03-17"
+  },
+  {
+    id: 5,
+    title: "Fielding and Defense Mastery",
+    description: "Essential defensive skills and positioning strategies",
+    type: "video",
+    thumbnail: "https://picsum.photos/seed/baseball5/800/600",
+    author: "Carlos Ramirez",
+    date: "2024-03-16"
   }
 ];
 
