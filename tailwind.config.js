@@ -1,8 +1,7 @@
-const withMT = require("@material-tailwind/react/utils/withMT");
 const { default: flattenColorPalette } = require("tailwindcss/lib/util/flattenColorPalette");
 const svgToDataUri = require("mini-svg-data-uri");
 
-module.exports = withMT({
+module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
@@ -48,4 +47,4 @@ module.exports = withMT({
       );
     },
   ],
-});
+};
