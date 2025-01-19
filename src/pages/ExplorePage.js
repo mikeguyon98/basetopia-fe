@@ -11,7 +11,8 @@ const mockContent = [
     type: "video",
     thumbnail: "https://picsum.photos/seed/baseball1/800/600",
     videoUrl: "https://mlb-cuts-diamond.mlb.com/FORGE/2024/2024-02/22/4cf6d8fb-5dab6c56-f3c3f4a2-csvm-diamondx64-asset_1280x720_59_4000K.mp4",
-    author: "Mike Martinez",
+    players: ["Clayton Kershaw", "Max Scherzer"],
+    teams: ["Los Angeles Dodgers", "New York Mets"],
     date: "2024-03-20",
     isFollowed: true
   },

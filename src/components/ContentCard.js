@@ -13,6 +13,15 @@ export function ContentCard({ item }) {
     setIsModalOpen(false);
   };
 
+  const PillLabel = ({ text, type }) => (
+    <span className={`
+      px-2 py-1 rounded-full text-xs font-medium
+      ${type === 'player' ? 'bg-blue-500/20 text-blue-400' : 'bg-purple-500/20 text-purple-400'}
+    `}>
+      {text}
+    </span>
+  );
+
   return (
     <>
       <div 
@@ -48,8 +57,12 @@ export function ContentCard({ item }) {
             {item.title}
           </h3>
           
-          <div className="flex justify-between items-center text-sm text-gray-500">
-            <span className="text-gray-400">{item.author}</span>
+          <div className="flex flex-wrap gap-2 mb-2">
+            {item.players?.[0] && <PillLabel text={item.players[0]} type="player" />}
+            {item.teams?.[0] && <PillLabel text={item.teams[0]} type="team" />}
+          </div>
+          
+          <div className="flex justify-end items-center text-sm text-gray-500">
             <span className="text-gray-400">{item.date}</span>
           </div>
         </div>
@@ -92,9 +105,24 @@ export function ContentCard({ item }) {
               <h2 className="text-2xl font-bold text-white mb-4">{item.title}</h2>
               <p className="text-gray-400 mb-6">{item.description}</p>
               
-              <div className="flex justify-between items-center text-sm text-gray-400">
-                <span>{item.author}</span>
-                <span>{item.date}</span>
+              <div className="space-y-4">
+                <div className="flex flex-wrap gap-2">
+                  <span className="text-sm text-gray-400 mr-2">Players:</span>
+                  {item.players?.map((player, index) => (
+                    <PillLabel key={index} text={player} type="player" />
+                  ))}
+                </div>
+                
+                <div className="flex flex-wrap gap-2">
+                  <span className="text-sm text-gray-400 mr-2">Teams:</span>
+                  {item.teams?.map((team, index) => (
+                    <PillLabel key={index} text={team} type="team" />
+                  ))}
+                </div>
+                
+                <div className="flex justify-end items-center text-sm text-gray-400">
+                  <span>{item.date}</span>
+                </div>
               </div>
             </div>
           </div>
