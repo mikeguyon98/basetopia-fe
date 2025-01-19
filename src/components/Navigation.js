@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { UserCircleIcon } from "@heroicons/react/24/outline";
 import SignInButton from "./SignInButton";
 import LogoutButton from "./LogoutButton";
 import LanguageSelector from "./LanguageSelector";
@@ -13,13 +14,13 @@ function Navigation({ user }) {
         <li>
           <Link to="/" className="hover:underline">{t('home')}</Link>
         </li>
-        {user && (
-          <li>
-            <Link to="/profile" className="hover:underline">{t('profile')}</Link>
-          </li>
-        )}
         <li className="ml-auto flex items-center gap-4">
           <LanguageSelector />
+          {user && (
+            <Link to="/profile" className="hover:text-gray-300">
+              <UserCircleIcon className="h-6 w-6" />
+            </Link>
+          )}
           {user ? (
             <LogoutButton />
           ) : (
