@@ -16,7 +16,8 @@ const resources = {
       error: 'Error: {{message}}',
       userProfile: 'User Profile',
       name: 'Name',
-      email: 'Email'
+      email: 'Email',
+      explore: 'Explore'
     }
   },
   es: {
@@ -32,7 +33,8 @@ const resources = {
       error: 'Error: {{message}}',
       userProfile: 'Perfil del Usuario',
       name: 'Nombre',
-      email: 'Correo electrónico'
+      email: 'Correo electrónico',
+      explore: 'Explorar'
     }
   },
   ja: {
@@ -48,7 +50,8 @@ const resources = {
       error: 'エラー: {{message}}',
       userProfile: 'ユーザープロフィール',
       name: '名前',
-      email: 'メールアドレス'
+      email: 'メールアドレス',
+      explore: '探索'
     }
   }
 };
