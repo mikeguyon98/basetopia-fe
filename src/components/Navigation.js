@@ -12,7 +12,7 @@ function Navigation({ user }) {
     <nav className="mb-4">
       <ul className="flex gap-4 items-center">
         <li>
-          <Link to="/" className="hover:text-gray-300">
+          <Link to={user ? "/explore" : "/"} className="hover:text-gray-300">
             <span className="font-bold text-lg">Basetopia</span>
           </Link>
         </li>

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import HomePage from "./pages/HomePage";
+import ExplorePage from "./pages/ExplorePage";
 import UserProfile from "./components/UserProfile";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { useAuth } from "./utils/useAuth";
@@ -17,6 +18,14 @@ function App() {
           <main className="container mx-auto">
             <Routes>
               <Route path="/" element={<HomePage user={user} />} />
+              <Route 
+                path="/explore" 
+                element={
+                  <ProtectedRoute user={user} loading={loading}>
+                    <ExplorePage />
+                  </ProtectedRoute>
+                } 
+              />
               <Route 
                 path="/profile" 
                 element={
