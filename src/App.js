@@ -10,22 +10,24 @@ function App() {
 
   return (
     <Router>
-      <div className="p-4">
-        <Navigation user={user} />
+      <div className="min-h-screen bg-black text-white bg-grid bg-grid-white/[0.02]">
+        <div className="p-4 relative">
+          <Navigation user={user} />
 
-        <main className="container mx-auto">
-          <Routes>
-            <Route path="/" element={<HomePage user={user} />} />
-            <Route 
-              path="/profile" 
-              element={
-                <ProtectedRoute user={user} loading={loading}>
-                  <UserProfile />
-                </ProtectedRoute>
-              } 
-            />
-          </Routes>
-        </main>
+          <main className="container mx-auto">
+            <Routes>
+              <Route path="/" element={<HomePage user={user} />} />
+              <Route 
+                path="/profile" 
+                element={
+                  <ProtectedRoute user={user} loading={loading}>
+                    <UserProfile />
+                  </ProtectedRoute>
+                } 
+              />
+            </Routes>
+          </main>
+        </div>
       </div>
     </Router>
   );
