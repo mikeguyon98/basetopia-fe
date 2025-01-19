@@ -15,7 +15,7 @@ function Navigation({ user }) {
         </li>
         {user && (
           <li>
-            <Link to="/profile" className="hover:underline">{t('Profile')}</Link>
+            <Link to="/profile" className="hover:underline">{t('profile')}</Link>
           </li>
         )}
         <li className="ml-auto flex items-center gap-4">
