@@ -1,33 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { api } from '../api/client';
+import React from 'react';
+import { useAuth } from '../utils/useAuth';
+import { useTranslation } from 'react-i18next';
 
 function UserProfile() {
-  const [profile, setProfile] = useState(null);
-  const [error, setError] = useState(null);
+  const { user } = useAuth();
+  const { t } = useTranslation();
 
-  useEffect(() => {
-    const loadProfile = async () => {
-      try {
-        const data = await api.getUserProfile();
-        setProfile(data);
-      } catch (err) {
-        setError(err.message);
-      }
-    };
-
-    loadProfile();
-  }, []);
-
-  if (error) return <div>Error: {error}</div>;
-  if (!profile) return <div>Loading...</div>;
+  if (!user) {
+    return <div>{t('loading')}</div>;
+  }
 
   return (
-    <div>
-      <h2>User Profile</h2>
-      <img src={profile.photoURL} alt="Profile" />
-      <p>Name: {profile.displayName}</p>
-      <p>Email: {profile.email}</p>
-      <p>Email verified: {profile.emailVerified ? 'Yes' : 'No'}</p>
+    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-6">{t('userProfile')}</h2>
+      {user.displayName && (
+        <p className="mb-2">
+          <span className="font-semibold">{t('name')}:</span> {user.displayName}
+        </p>
+      )}
+      <p className="mb-2">
+        <span className="font-semibold">{t('email')}:</span> {user.email}
+      </p>
     </div>
   );
 }

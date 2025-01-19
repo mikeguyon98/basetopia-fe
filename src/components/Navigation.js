@@ -15,16 +15,13 @@ function Navigation({ user }) {
         </li>
         {user && (
           <li>
-            <Link to="/profile" className="hover:underline">{t('profile')}</Link>
+            <Link to="/profile" className="hover:underline">{t('Profile')}</Link>
           </li>
         )}
         <li className="ml-auto flex items-center gap-4">
           <LanguageSelector />
           {user ? (
-            <div className="flex items-center gap-4">
-              <span>{t('welcome_user', { email: user.email })}</span>
-              <LogoutButton />
-            </div>
+            <LogoutButton />
           ) : (
             <SignInButton />
           )}

@@ -13,7 +13,10 @@ const resources = {
       signOut: 'Sign Out',
       welcome_user: 'Welcome, {{email}}!',
       loading: 'Loading...',
-      error: 'Error: {{message}}'
+      error: 'Error: {{message}}',
+      userProfile: 'User Profile',
+      name: 'Name',
+      email: 'Email'
     }
   },
   es: {
@@ -26,7 +29,10 @@ const resources = {
       signOut: 'Cerrar sesión',
       welcome_user: '¡Bienvenido, {{email}}!',
       loading: 'Cargando...',
-      error: 'Error: {{message}}'
+      error: 'Error: {{message}}',
+      userProfile: 'Perfil del Usuario',
+      name: 'Nombre',
+      email: 'Correo electrónico'
     }
   },
   ja: {
@@ -39,7 +45,10 @@ const resources = {
       signOut: 'サインアウト',
       welcome_user: 'ようこそ、{{email}}さん！',
       loading: '読み込み中...',
-      error: 'エラー: {{message}}'
+      error: 'エラー: {{message}}',
+      userProfile: 'ユーザープロフィール',
+      name: '名前',
+      email: 'メールアドレス'
     }
   }
 };
