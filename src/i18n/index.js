@@ -17,7 +17,8 @@ const resources = {
       userProfile: 'User Profile',
       name: 'Name',
       email: 'Email',
-      explore: 'Explore'
+      explore: 'Explore',
+      following: 'Following'
     }
   },
   es: {
@@ -34,7 +35,8 @@ const resources = {
       userProfile: 'Perfil del Usuario',
       name: 'Nombre',
       email: 'Correo electrónico',
-      explore: 'Explorar'
+      explore: 'Explorar',
+      following: 'Siguiendo'
     }
   },
   ja: {
@@ -51,7 +53,8 @@ const resources = {
       userProfile: 'ユーザープロフィール',
       name: '名前',
       email: 'メールアドレス',
-      explore: '探索'
+      explore: '探索',
+      following: 'フォロー中'
     }
   }
 };
