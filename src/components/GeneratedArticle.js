@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import ArticleContent from './ArticleContent';
 
 function GeneratedArticle({ article, onLanguageChange }) {
   const { i18n } = useTranslation();
@@ -11,9 +12,15 @@ function GeneratedArticle({ article, onLanguageChange }) {
 
   if (!article) return null;
 
+  const currentArticle = article[i18n.language];
+
   return (
-    <div className="max-w-2xl mx-auto mt-8 bg-dark-800 rounded-lg p-6">
-      <div className="mb-4 flex justify-end">
+    <div className="max-w-3xl mx-auto mt-8 bg-dark-800 rounded-lg p-6">
+      <div className="mb-6 flex justify-between items-center">
+        <h1 className="text-2xl font-bold text-white">
+          {currentArticle?.title}
+        </h1>
+        
         <select 
           onChange={(e) => onLanguageChange(e.target.value)}
           value={i18n.language}
@@ -26,16 +33,8 @@ function GeneratedArticle({ article, onLanguageChange }) {
           ))}
         </select>
       </div>
-
-      <h1 className="text-2xl font-bold mb-4 text-white">
-        {article[i18n.language]?.title}
-      </h1>
       
-      <div className="prose prose-invert">
-        <p className="text-gray-300 whitespace-pre-wrap">
-          {article[i18n.language]?.content}
-        </p>
-      </div>
+      <ArticleContent content={currentArticle?.content} />
     </div>
   );
 }
