@@ -1,6 +1,7 @@
 import { getAuth } from "firebase/auth";
 
-const API_BASE_URL = 'http://localhost:8000';
+// const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://basetopia-be-421858698882.us-east1.run.app';
 
 export async function fetchWithAuth(endpoint, options = {}) {
   const auth = getAuth();
