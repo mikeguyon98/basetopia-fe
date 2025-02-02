@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Video, FileText, X } from 'lucide-react';
+import { X } from 'lucide-react';
 
 export function ContentCard({ item }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,23 +36,9 @@ export function ContentCard({ item }) {
             alt={item.title} 
             className="w-full h-48 object-cover" 
           />
-          {item.videoUrl && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
-              <Video className="text-white" size={48} />
-            </div>
-          )}
         </div>
         
-        <div className="p-4 relative z-10">
-          <div className="flex items-center mb-2">
-            {item.type === 'video' ? (
-              <Video className="text-blue-400 mr-2" size={20} />
-            ) : (
-              <FileText className="text-blue-400 mr-2" size={20} />
-            )}
-            <span className="text-sm text-gray-400 capitalize">{item.type}</span>
-          </div>
-          
+        <div className="p-4 relative z-10">          
           <h3 className="text-lg font-semibold mb-2 text-white group-hover:text-blue-400 transition-colors duration-300">
             {item.title}
           </h3>
@@ -83,22 +69,24 @@ export function ContentCard({ item }) {
                 <X className="text-white" size={24} />
               </button>
               
-              {item.videoUrl ? (
-                <video 
-                  controls 
-                  autoPlay 
-                  className="w-full h-[400px] object-cover"
-                >
-                  <source src={item.videoUrl} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              ) : (
-                <img 
-                  src={item.thumbnail} 
-                  alt={item.title}
-                  className="w-full h-[400px] object-cover"
-                />
-              )}
+              <div className="relative">
+                {item.videoUrl ? (
+                  <video 
+                    controls 
+                    autoPlay 
+                    className="w-full h-[400px] object-cover"
+                  >
+                    <source src={item.videoUrl} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                ) : (
+                  <img 
+                    src={item.thumbnail} 
+                    alt={item.title}
+                    className="w-full h-[400px] object-cover"
+                  />
+                )}
+              </div>
             </div>
 
             <div className="p-6">
