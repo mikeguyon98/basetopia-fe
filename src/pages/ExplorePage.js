@@ -64,10 +64,48 @@ const mockContent = [
 function ExplorePage() {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('explore');
+  const [inputText, setInputText] = useState('');
   
   const filteredContent = activeTab === 'explore' 
     ? mockContent 
     : mockContent.filter(item => item.isFollowed);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // API call will go here later
+    console.log('Submitted text:', inputText);
+  };
+
+  const renderContent = () => {
+    if (activeTab === 'agent') {
+      return (
+        <div className="max-w-2xl mx-auto mt-8">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <textarea
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              className="w-full h-40 p-4 bg-dark-800 border border-dark-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder={t('agentPlaceholder')}
+            />
+            <button
+              type="submit"
+              className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-200"
+            >
+              {t('createArticle')}
+            </button>
+          </form>
+        </div>
+      );
+    }
+
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredContent.map((item) => (
+          <ContentCard key={item.id} item={item} />
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="container mx-auto px-4">
@@ -93,14 +131,20 @@ function ExplorePage() {
           >
             {t('following')}
           </button>
+          <button
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+              activeTab === 'agent'
+                ? 'bg-blue-500 text-white'
+                : 'text-gray-400 hover:text-white'
+            }`}
+            onClick={() => setActiveTab('agent')}
+          >
+            ✨ {t('agent')}
+          </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredContent.map((item) => (
-          <ContentCard key={item.id} item={item} />
-        ))}
-      </div>
+      {renderContent()}
     </div>
   );
 }

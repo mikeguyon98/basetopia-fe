@@ -18,7 +18,10 @@ const resources = {
       name: 'Name',
       email: 'Email',
       explore: 'Explore',
-      following: 'Following'
+      following: 'Following',
+      agent: 'Agent',
+      createArticle: 'Create Article',
+      agentPlaceholder: 'Tell me your baseball interests to create a personalized article with video highlights...'
     }
   },
   es: {
@@ -36,7 +39,10 @@ const resources = {
       name: 'Nombre',
       email: 'Correo electrónico',
       explore: 'Explorar',
-      following: 'Siguiendo'
+      following: 'Siguiendo',
+      agent: 'Agente',
+      createArticle: 'Crear Artículo',
+      agentPlaceholder: 'Cuéntame tus intereses de béisbol para crear un artículo personalizado con videos destacados...'
     }
   },
   ja: {
@@ -54,7 +60,10 @@ const resources = {
       name: '名前',
       email: 'メールアドレス',
       explore: '探索',
-      following: 'フォロー中'
+      following: 'フォロー中',
+      agent: 'エージェント',
+      createArticle: '記事を作成',
+      agentPlaceholder: '野球の興味を教えてください。ビデオハイライトを含むパーソナライズされた記事を作成します...'
     }
   }
 };
