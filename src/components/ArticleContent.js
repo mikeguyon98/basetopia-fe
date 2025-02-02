@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
-import { Play } from 'lucide-react';
+import React from 'react';
 
 function ArticleContent({ content }) {
-  const [activeVideo, setActiveVideo] = useState(null);
-
   const renderContent = () => {
     // Split content by lines
     const lines = content.split('\n');
@@ -59,36 +56,27 @@ function ArticleContent({ content }) {
                 return <HeaderTag key={i} className="text-white font-bold mb-4">{text}</HeaderTag>;
               }
               // Handle regular paragraphs
-              return <p key={i} className="text-gray-300 mb-2">{line}</p>;
+              return line.trim() ? <p key={i} className="text-gray-300 mb-2">{line}</p> : null;
             })}
           </div>
         );
       } else if (section.type === 'video') {
         return (
-          <div key={index} className="mb-4">
-            {activeVideo === section.url ? (
-              <div className="relative aspect-video mb-2">
-                <video
-                  controls
-                  autoPlay
-                  className="w-full h-full rounded-lg"
-                >
-                  <source src={section.url} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            ) : (
-              <button
-                onClick={() => setActiveVideo(section.url)}
-                className="w-full bg-dark-800 rounded-lg p-4 flex items-center gap-3 hover:bg-dark-700 transition-colors"
+          <div key={index} className="mb-6">
+            <div className="relative aspect-video">
+              <video
+                controls
+                className="w-full h-full rounded-lg"
               >
-                <Play className="text-blue-500" />
-                <span className="text-white">{section.title}</span>
-              </button>
-            )}
+                <source src={section.url} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p className="text-sm text-gray-400 mt-2">{section.title}</p>
           </div>
         );
       }
+      return null;
     });
   };
 
