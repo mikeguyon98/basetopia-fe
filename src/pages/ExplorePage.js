@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ContentCard } from '../components/ContentCard';
+import GeneratedArticle from '../components/GeneratedArticle';
 
 // Mock data
 const mockContent = [
@@ -62,18 +63,46 @@ const mockContent = [
 }));
 
 function ExplorePage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState('explore');
   const [inputText, setInputText] = useState('');
+  const [generatedArticle, setGeneratedArticle] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   
   const filteredContent = activeTab === 'explore' 
     ? mockContent 
     : mockContent.filter(item => item.isFollowed);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // API call will go here later
-    console.log('Submitted text:', inputText);
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/ml/agent/query`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user_query: inputText,
+          input_language: i18n.language
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      setGeneratedArticle(data.final_response);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const renderContent = () => {
@@ -86,14 +115,28 @@ function ExplorePage() {
               onChange={(e) => setInputText(e.target.value)}
               className="w-full h-40 p-4 bg-dark-800 border border-dark-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               placeholder={t('agentPlaceholder')}
+              disabled={isLoading}
             />
+            {error && (
+              <div className="text-red-500 text-sm">{error}</div>
+            )}
             <button
               type="submit"
-              className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-200"
+              className={`w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-200 ${
+                isLoading ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
+              disabled={isLoading}
             >
-              {t('createArticle')}
+              {isLoading ? t('loading') : t('createArticle')}
             </button>
           </form>
+
+          {generatedArticle && (
+            <GeneratedArticle 
+              article={generatedArticle}
+              onLanguageChange={(lang) => i18n.changeLanguage(lang)}
+            />
+          )}
         </div>
       );
     }
