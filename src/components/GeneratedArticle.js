@@ -3,9 +3,10 @@ import { useTranslation } from 'react-i18next';
 import ArticleContent from './ArticleContent';
 
 function GeneratedArticle({ article, onLanguageChange }) {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isPublishing, setIsPublishing] = useState(false);
   const [publishError, setPublishError] = useState(null);
+  const [publishSuccess, setPublishSuccess] = useState(false);
   
   const languages = [
     { code: 'en', label: 'English', emoji: '🇺🇸' },
@@ -16,6 +17,7 @@ function GeneratedArticle({ article, onLanguageChange }) {
   const handlePublish = async () => {
     setIsPublishing(true);
     setPublishError(null);
+    setPublishSuccess(false);
 
     try {
       const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/ml/posts`, {
@@ -28,13 +30,15 @@ function GeneratedArticle({ article, onLanguageChange }) {
         }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || 'Failed to publish article');
+        throw new Error(data.error || 'Failed to publish article');
       }
 
-      // Handle successful publish - maybe show a success message or redirect
-      console.log('Article published successfully');
+      setPublishSuccess(true);
+      // Hide success message after 5 seconds
+      setTimeout(() => setPublishSuccess(false), 5000);
     } catch (err) {
       setPublishError(err.message);
     } finally {
@@ -73,10 +77,16 @@ function GeneratedArticle({ article, onLanguageChange }) {
               isPublishing ? 'opacity-50 cursor-not-allowed' : ''
             }`}
           >
-            {isPublishing ? 'Publishing...' : 'Publish'}
+            {isPublishing ? t('publishing') : t('publish')}
           </button>
         </div>
       </div>
+      
+      {publishSuccess && (
+        <div className="mb-4 p-3 bg-green-500/20 border border-green-500 rounded-md text-green-500">
+          {t('publishSuccess')}
+        </div>
+      )}
       
       {publishError && (
         <div className="mb-4 p-3 bg-red-500/20 border border-red-500 rounded-md text-red-500">

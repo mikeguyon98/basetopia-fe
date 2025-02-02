@@ -21,7 +21,10 @@ const resources = {
       following: 'Following',
       agent: 'Agent',
       createArticle: 'Create Article',
-      agentPlaceholder: 'Tell me your baseball interests to create a personalized article with video highlights...'
+      agentPlaceholder: 'Tell me your baseball interests to create a personalized article with video highlights...',
+      publishing: 'Publishing...',
+      publish: 'Publish',
+      publishSuccess: 'Article published successfully!'
     }
   },
   es: {
@@ -42,7 +45,10 @@ const resources = {
       following: 'Siguiendo',
       agent: 'Agente',
       createArticle: 'Crear Artículo',
-      agentPlaceholder: 'Cuéntame tus intereses de béisbol para crear un artículo personalizado con videos destacados...'
+      agentPlaceholder: 'Cuéntame tus intereses de béisbol para crear un artículo personalizado con videos destacados...',
+      publishing: 'Publicando...',
+      publish: 'Publicar',
+      publishSuccess: '¡Artículo publicado exitosamente!'
     }
   },
   ja: {
@@ -63,7 +69,10 @@ const resources = {
       following: 'フォロー中',
       agent: 'エージェント',
       createArticle: '記事を作成',
-      agentPlaceholder: '野球の興味を教えてください。ビデオハイライトを含むパーソナライズされた記事を作成します...'
+      agentPlaceholder: '野球の興味を教えてください。ビデオハイライトを含むパーソナライズされた記事を作成します...',
+      publishing: '公開中...',
+      publish: '公開する',
+      publishSuccess: '記事が正常に公開されました！'
     }
   }
 };
