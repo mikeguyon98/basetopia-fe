@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ContentCard } from '../components/ContentCard';
 import GeneratedArticle from '../components/GeneratedArticle';
+import { fetchWithAuth } from '../api/client';
 
 function ExplorePage() {
   const { t, i18n } = useTranslation();
@@ -12,6 +13,20 @@ function ExplorePage() {
   const [error, setError] = useState(null);
   const [content, setContent] = useState([]); // State for content
   
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const posts = await fetchWithAuth('/api/ml/posts/all');
+        setContent(posts);
+      } catch (err) {
+        console.error('Error fetching posts:', err);
+        setError(err.message);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
   const filteredContent = activeTab === 'explore' 
     ? content 
     : content.filter(item => item.isFollowed);
