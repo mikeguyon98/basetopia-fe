@@ -3,65 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { ContentCard } from '../components/ContentCard';
 import GeneratedArticle from '../components/GeneratedArticle';
 
-// Mock data
-const mockContent = [
-  {
-    id: 1,
-    title: "Baseball Pitching Fundamentals",
-    description: "Master the basic pitching techniques and grips for different pitch types",
-    type: "video",
-    thumbnail: "https://picsum.photos/seed/baseball1/800/600",
-    videoUrl: "https://mlb-cuts-diamond.mlb.com/FORGE/2024/2024-02/22/4cf6d8fb-5dab6c56-f3c3f4a2-csvm-diamondx64-asset_1280x720_59_4000K.mp4",
-    players: ["Clayton Kershaw", "Max Scherzer"],
-    teams: ["Los Angeles Dodgers", "New York Mets"],
-    date: "2024-03-20",
-    isFollowed: true
-  },
-  {
-    id: 2,
-    title: "History of the World Series",
-    description: "Explore the most memorable moments in World Series history",
-    type: "article",
-    thumbnail: "https://picsum.photos/seed/baseball2/800/600",
-    author: "Sarah Thompson",
-    date: "2024-03-19",
-    isFollowed: false
-  },
-  {
-    id: 3,
-    title: "Advanced Batting Techniques",
-    description: "Improve your hitting with professional batting tips and drills",
-    type: "video",
-    thumbnail: "https://picsum.photos/seed/baseball3/800/600",
-    author: "David Rodriguez",
-    date: "2024-03-18",
-    isFollowed: true
-  },
-  {
-    id: 4,
-    title: "Baseball Analytics 101",
-    description: "Understanding modern baseball statistics and sabermetrics",
-    type: "article",
-    thumbnail: "https://picsum.photos/seed/baseball4/800/600",
-    author: "Emily Chen",
-    date: "2024-03-17",
-    isFollowed: false
-  },
-  {
-    id: 5,
-    title: "Fielding and Defense Mastery",
-    description: "Essential defensive skills and positioning strategies",
-    type: "video",
-    thumbnail: "https://picsum.photos/seed/baseball5/800/600",
-    author: "Carlos Ramirez",
-    date: "2024-03-16",
-    isFollowed: true
-  }
-].map(item => ({
-  ...item,
-  isFollowed: Math.random() < 0.5 // Randomly assign followed status for mock data
-}));
-
 function ExplorePage() {
   const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState('explore');
@@ -69,10 +10,11 @@ function ExplorePage() {
   const [generatedArticle, setGeneratedArticle] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [content, setContent] = useState([]); // State for content
   
   const filteredContent = activeTab === 'explore' 
-    ? mockContent 
-    : mockContent.filter(item => item.isFollowed);
+    ? content 
+    : content.filter(item => item.isFollowed);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
