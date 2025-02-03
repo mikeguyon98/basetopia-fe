@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { getAuth } from 'firebase/auth';
 import ArticleContent from './ArticleContent';
 
 function GeneratedArticle({ article, onLanguageChange }) {
@@ -20,14 +21,22 @@ function GeneratedArticle({ article, onLanguageChange }) {
     setPublishSuccess(false);
 
     try {
+      // Format the request body with empty tags
+      const requestBody = {
+        highlight_data: {
+          ...article,
+          player_tags: [],
+          team_tags: []
+        }
+      };
+
       const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/ml/posts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${await getAuth().currentUser.getIdToken()}`
         },
-        body: JSON.stringify({
-          highlight_data: article
-        }),
+        body: JSON.stringify(requestBody)
       });
 
       const data = await response.json();
@@ -37,7 +46,6 @@ function GeneratedArticle({ article, onLanguageChange }) {
       }
 
       setPublishSuccess(true);
-      // Hide success message after 5 seconds
       setTimeout(() => setPublishSuccess(false), 5000);
     } catch (err) {
       setPublishError(err.message);
