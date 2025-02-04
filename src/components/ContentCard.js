@@ -6,7 +6,7 @@ export function ContentCard({ item }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { i18n } = useTranslation();
 
-  const currentContent = item[i18n.language];
+  const currentContent = item[i18n.language] || {};
   
   // Extract first video URL from content if available
   const getFirstVideoUrl = () => {
@@ -61,7 +61,7 @@ export function ContentCard({ item }) {
         
         <div className="p-4 relative z-10">          
           <h3 className="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors duration-300">
-            {currentContent.title}
+            {currentContent?.title || ''}
           </h3>
           
           <div className="flex flex-wrap gap-2 mb-2">
