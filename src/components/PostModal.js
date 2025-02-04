@@ -20,29 +20,31 @@ function PostModal({ post, onClose }) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-6 relative">
-          <button 
-            onClick={onClose}
-            className="absolute top-4 right-4 p-1 bg-dark-700 rounded-full hover:bg-dark-600"
-          >
-            <X className="text-white" size={24} />
-          </button>
-
           <div className="mb-6 flex justify-between items-center">
             <h1 className="text-2xl font-bold text-white">
               {currentContent?.title}
             </h1>
             
-            <select 
-              onChange={(e) => i18n.changeLanguage(e.target.value)}
-              value={i18n.language}
-              className="px-3 py-2 bg-dark-800 text-white border border-dark-700 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              {languages.map(({ code, label, emoji }) => (
-                <option key={code} value={code}>
-                  {emoji} {label}
-                </option>
-              ))}
-            </select>
+            <div className="flex items-center gap-6">
+              <select 
+                onChange={(e) => i18n.changeLanguage(e.target.value)}
+                value={i18n.language}
+                className="px-3 py-2 bg-dark-800 text-white border border-dark-700 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                {languages.map(({ code, label, emoji }) => (
+                  <option key={code} value={code}>
+                    {emoji} {label}
+                  </option>
+                ))}
+              </select>
+
+              <button 
+                onClick={onClose}
+                className="p-1 bg-dark-700 rounded-full hover:bg-dark-600"
+              >
+                <X className="text-white" size={24} />
+              </button>
+            </div>
           </div>
           
           <ArticleContent content={currentContent?.content} />
