@@ -56,7 +56,11 @@ function ExplorePage() {
   const fetchPosts = async () => {
     try {
       const posts = await fetchWithAuth('/api/ml/posts/all');
-      setContent(posts);
+      // Sort posts by created_at in descending order (newest first)
+      const sortedPosts = posts.sort((a, b) => 
+        new Date(b.created_at) - new Date(a.created_at)
+      );
+      setContent(sortedPosts);
     } catch (err) {
       console.error('Error fetching posts:', err);
       setError(err.message);
