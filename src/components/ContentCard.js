@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { X } from 'lucide-react';
 import PostModal from './PostModal';
 import { useTranslation } from 'react-i18next';
 
