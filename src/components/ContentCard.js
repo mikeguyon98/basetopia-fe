@@ -10,6 +10,9 @@ export function ContentCard({ item }) {
   
   // Extract first video URL from content if available
   const getFirstVideoUrl = () => {
+    if (!currentContent || !currentContent.content) {
+      return null;
+    }
     const match = currentContent.content.match(/\[.*\]\((https:\/\/mlb-cuts-diamond\.mlb\.com.*\.mp4)\)/);
     return match ? match[1] : null;
   };
@@ -41,17 +44,19 @@ export function ContentCard({ item }) {
         <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         
         <div className="relative">
-          <video 
-            className="w-full h-48 object-cover"
-            muted
-            onMouseOver={e => e.target.play()}
-            onMouseOut={e => {
-              e.target.pause();
-              e.target.currentTime = 0;
-            }}
-          >
-            <source src={getFirstVideoUrl()} type="video/mp4" />
-          </video>
+          {getFirstVideoUrl() && (
+            <video 
+              className="w-full h-48 object-cover"
+              muted
+              onMouseOver={e => e.target.play()}
+              onMouseOut={e => {
+                e.target.pause();
+                e.target.currentTime = 0;
+              }}
+            >
+              <source src={getFirstVideoUrl()} type="video/mp4" />
+            </video>
+          )}
         </div>
         
         <div className="p-4 relative z-10">          
