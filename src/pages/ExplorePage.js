@@ -4,6 +4,7 @@ import { ContentCard } from '../components/ContentCard';
 import GeneratedArticle from '../components/GeneratedArticle';
 import { fetchWithAuth } from '../api/client';
 import { getAuth } from 'firebase/auth';
+import SearchResultModal from '../components/SearchResultModal';
 
 function ExplorePage() {
   const { t, i18n } = useTranslation();
@@ -18,6 +19,7 @@ function ExplorePage() {
     players: [],
     teams: [],
   });
+  const [selectedResult, setSelectedResult] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -100,7 +102,11 @@ function ExplorePage() {
             <h3 className="text-lg font-semibold mb-3">Players</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {searchResults.players.map(player => (
-                <div key={player.id} className="bg-dark-800 p-4 rounded-lg border border-dark-700">
+                <div 
+                  key={player.id} 
+                  className="bg-dark-800 p-4 rounded-lg border border-dark-700 cursor-pointer hover:border-blue-500 transition-colors duration-200"
+                  onClick={() => setSelectedResult({ id: player.id, type: 'player' })}
+                >
                   <div className="flex items-center space-x-3">
                     {player.headshot_url && (
                       <img 
@@ -125,7 +131,11 @@ function ExplorePage() {
             <h3 className="text-lg font-semibold mb-3">Teams</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {searchResults.teams.map(team => (
-                <div key={team.id} className="bg-dark-800 p-4 rounded-lg border border-dark-700">
+                <div 
+                  key={team.id} 
+                  className="bg-dark-800 p-4 rounded-lg border border-dark-700 cursor-pointer hover:border-blue-500 transition-colors duration-200"
+                  onClick={() => setSelectedResult({ id: team.id, type: 'team' })}
+                >
                   <div className="flex items-center space-x-3">
                     {team.logo_url && (
                       <img 
@@ -143,6 +153,13 @@ function ExplorePage() {
               ))}
             </div>
           </div>
+        )}
+
+        {selectedResult && (
+          <SearchResultModal 
+            {...selectedResult}
+            onClose={() => setSelectedResult(null)}
+          />
         )}
       </div>
     );

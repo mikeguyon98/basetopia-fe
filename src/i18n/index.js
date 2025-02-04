@@ -25,7 +25,8 @@ const resources = {
       agentPlaceholder: 'Tell me your baseball interests to create a personalized article with video highlights...',
       publishing: 'Publishing...',
       publish: 'Publish',
-      publishSuccess: 'Article published successfully!'
+      publishSuccess: 'Article published successfully!',
+      noResults: 'No relevant results found',
     }
   },
   es: {
@@ -50,7 +51,8 @@ const resources = {
       agentPlaceholder: 'Cuéntame tus intereses de béisbol para crear un artículo personalizado con videos destacados...',
       publishing: 'Publicando...',
       publish: 'Publicar',
-      publishSuccess: '¡Artículo publicado exitosamente!'
+      publishSuccess: '¡Artículo publicado exitosamente!',
+      noResults: 'No se encontraron resultados relevantes',
     }
   },
   ja: {
@@ -75,7 +77,8 @@ const resources = {
       agentPlaceholder: '野球の興味を教えてください。ビデオハイライトを含むパーソナライズされた記事を作成します...',
       publishing: '公開中...',
       publish: '公開する',
-      publishSuccess: '記事が正常に公開されました！'
+      publishSuccess: '記事が正常に公開されました！',
+      noResults: '関連する結果が見つかりませんでした',
     }
   }
 };
