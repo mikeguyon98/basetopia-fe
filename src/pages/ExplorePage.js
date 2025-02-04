@@ -53,17 +53,17 @@ function ExplorePage() {
     }
   };
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const posts = await fetchWithAuth('/api/ml/posts/all');
-        setContent(posts);
-      } catch (err) {
-        console.error('Error fetching posts:', err);
-        setError(err.message);
-      }
-    };
+  const fetchPosts = async () => {
+    try {
+      const posts = await fetchWithAuth('/api/ml/posts/all');
+      setContent(posts);
+    } catch (err) {
+      console.error('Error fetching posts:', err);
+      setError(err.message);
+    }
+  };
 
+  useEffect(() => {
     fetchPosts();
   }, []);
 
@@ -91,6 +91,13 @@ function ExplorePage() {
 
     return () => clearTimeout(debounceTimer);
   }, [searchQuery]);
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    if (tab === 'feed') {
+      fetchPosts();
+    }
+  };
 
   const renderSearchResults = () => {
     if (!searchQuery.trim()) return null;
@@ -237,7 +244,7 @@ function ExplorePage() {
                 ? 'bg-blue-500 text-white'
                 : 'text-gray-400 hover:text-white'
             }`}
-            onClick={() => setActiveTab('feed')}
+            onClick={() => handleTabChange('feed')}
           >
             {t('feed')}
           </button>
@@ -247,7 +254,7 @@ function ExplorePage() {
                 ? 'bg-blue-500 text-white'
                 : 'text-gray-400 hover:text-white'
             }`}
-            onClick={() => setActiveTab('explore')}
+            onClick={() => handleTabChange('explore')}
           >
             {t('explore')}
           </button>
@@ -257,7 +264,7 @@ function ExplorePage() {
                 ? 'bg-blue-500 text-white'
                 : 'text-gray-400 hover:text-white'
             }`}
-            onClick={() => setActiveTab('agent')}
+            onClick={() => handleTabChange('agent')}
           >
             ✨ {t('agent')}
           </button>
